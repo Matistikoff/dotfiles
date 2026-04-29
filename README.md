@@ -109,7 +109,6 @@ dotfiles/
 - `zathura` + `zathura-pdf-mupdf` — PDF viewer
 - `btop` — system monitor
 - `fastfetch` — system info
-- `tgpt` — terminal GPT
 - `yay` — AUR helper
 
 ### GUI
