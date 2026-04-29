@@ -1,0 +1,211 @@
+DOTFILES REPO ::::::::::::::::::::::::::::::::::::::::::
+
+ Daily workflow:
+
+   dot status                        # what changed
+   dot add ~/.config/fish/config.fish
+   dot commit -m "fish: add alias"
+   dot push
+
+  Note for suckless — when you edit config.h, also copy it manually:
+
+   cp ~/programs/dwm/config.h ~/dotfiles-suckless/dwm/config.h
+   dot add ~/dotfiles-suckless/dwm/config.h && dot commit -m "dwm: update config"
+
+
+BATTERY THRESHOLD ::::::::::::::::::::::::::::::::::::::::
+
+Lítium-iónová batéria má ideálne napätie okolo 3,6–3,8 V na článok. To zodpovedá zhruba 20–80 % nabitia.
+
+vo /etc/tlp.conf 
+
+som si nastavil
+
+START_CHARGE_THRESH_BAT0=20
+STOP_CHARGE_THRESH_BAT0=80
+
+baterkaStats - alias pre staty
+
+tlp - robi battery management
+
+
+GITHUB REPO SSH ::::::::::::::::::::::::::::::::::::::::::;
+
+ # 1. Vygeneruj SSH kľúč
+ ssh-keygen -t ed25519 -C "tvoj@email.com"
+
+ # 2. Skopíruj verejný kľúč
+ cat ~/.ssh/id_ed25519.pub
+
+Potom na github.com/settings/keys (https://github.com/settings/keys) klikni New SSH key a vlož skopírovaný kľúč.
+
+ # 3. Zmeň remote na SSH
+ git remote set-url origin git@github.com:Matistikoff/straty_casu.git
+
+KDENLIVE::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+po vytvoreni noveho projektu spravit : 
+
+Project → Project Settings → Proxy
+zaškrtni Enable proxy clips
+
+aby mali klipy mensie rozlisenie a lepsie sa s tym pracovalo
+
+
+SYSTEMCTL::: 
+
+stiahol som si reflector ktory aktualizuje mirrory tyzdenne - # /etc/xdg/reflector/reflector.conf
+
+systemctl status reflector - si viem pozriet jeho status, ci bezi, kedy sa spusti znova
+
+sudo systemctl enable --now paccache.timer  # každý mesiac, ponechá 3 verzie
+
+tlp systemctl pre baterku
+
+fstrim --- SSD OPTIMALIZACIA
+
+
+
+FIREFOX STARTUP::::::::::::::::::::
+
+# /etc/fstab alebo pomocou profile-sync-daemon (AUR)
+yay -S profile-sync-daemon
+systemctl --user enable --now psd
+
+
+RANGER ::::::::::::::::::::::::::::::
+
+
+:filter .mp4 
+
+a - rename bez prepony
+
+
+SCREENSHOT ::: 
+
+maim -s | xclip -selection clipboard -t image/png
+
+
+FISH:::::::::::::::::::::::::::::
+
+ALT + arrows - ukaze historiu aktualneho commandu
+
+
+
+KOPIROVANIE CEZ YY / P v NVIM 
+
+naistalovat xclip
+set clipboard=unnamedplus
+
+
+NASTAVENIE SENZITIVITY:::::::
+
+/etc/udev/rules.d/10-trackpoint.rules
+
+
+nightshift::: 
+
+gammastep
+
+
+ZISTIT TLACIDLO ::: 
+
+xev
+
+
+VIDEO's ::::::::::::::::::::::::::::::::::;
+
+mpv nazov videa
+
+
+TORRENTING::: 
+
+torrent [nazov suboru alebo magnet link]
+
+
+USB:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+lsblk -f - zistim ake disky su mountnute - F mi ukaze filesystem 
+
+sudo mount -o rw,remount /dev/sdc1 /usb
+
+sudo umount /usb
+
+sudo mount -t ntfs-3g /dev/sdd1 /usb - ak je NTFS
+
+
+VIMDIFF::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+]c - skoč na ďalší rozdiel
+[c - skoč na predchádzajúci rozdiel
+dp - diff put (skopíruj zo ľavého do pravého)
+do - diff obtain (skopíruj z pravého do ľavého)
+:wqa - ulož oba súbory a zavri
+
+
+PATCHING ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+curl -O https://st.suckless.org/patches/xresources/st-xresources-20200604-9ba7ecf.diff
+
+patch -p1 < st-xresources-20200604-9ba7ecf.diff
+
+cez git diff porovnam zmeny a potom ich skopirujem z config.def.h do config.h
+
+
+WAL;::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+wal -i obrazok.jpg
+
+```
+1. Pywal analyzuje obrazok
+2. Vytvorí ~/.cache/wal/colors.json
+3. Nájde templates v ~/.config/wal/templates/
+4. Pre každý template:
+   - Načíta súbor
+   - Nájde všetky {background}, {color0}, atď.
+   - Nahradí ich skutočnými hex hodnotami z colors.json
+   - Uloží do ~/.cache/wal/
+5. Výsledok: ~/.cache/wal/colors-wal-dwm.h
+   static const char norm_bg[] = "#0e0d0f";
+   static const char sel_fg[] = "#c5bab5";
+
+FONTS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+- skopirovat do /usr/local/share/fonts/ .ttf, obt, 
+- sudo fc-cache -fv
+
+RYCHLOST PISANIE::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+xset rate r 200 400
+
+DWM INIT:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+.xinit
+
+NO PASSWORD LOGIN :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+sudo systemctl edit getty@tty1
+
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin tvoje_meno --noclear %I $TERM
+
+
+sudo systemctl daemon-reload
+
+sudo systemctl restart getty@tty1
+
+
+do bash_profile
+
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    exec startx
+fi
+
+
+
+
+
+
