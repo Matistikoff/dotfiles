@@ -101,8 +101,11 @@ end
 # WALLPAPER
 # ======================
 function wallpaper
-    wal -i ~/Downloads/wallpaper.jpeg
-    pywalfox update
+    set img $argv[1]
+    if test -z "$img"
+        set img ~/Downloads/wallpaper.jpeg
+    end
+    ~/.local/bin/change-wallpaper.sh "$img"
 end
 
 # ======================
