@@ -31,6 +31,7 @@ abbr o 'sxiv'
 abbr fc 'nvim ~/.config/fish/config.fish'
 abbr status 'nvim ~/.local/bin/dwmstatus.sh'
 abbr howto 'cd ~ && nvim howto.txt'
+abbr readme 'cd ~ && nvim README.md'
 
 # ======================
 # DWM / ST
@@ -43,6 +44,20 @@ end
 function dwmi
     cd ~/programs/dwm/src/dwm-6.6
     sudo make clean install
+    and touch /tmp/dwm-restart
+    and kill (pidof dwm)
+end
+
+function blockse
+    cd ~/programs/dwmblocks-async
+    nvim config.h
+end
+
+function blocksi
+    cd ~/programs/dwmblocks-async
+    sudo make clean install
+    kill (pidof dwmblocks) 2>/dev/null
+    dwmblocks &
 end
 
 function stc

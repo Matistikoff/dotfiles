@@ -1,5 +1,7 @@
 #include <X11/XF86keysym.h>
 
+#define STATUSBAR "dwmblocks"
+
 
 /* See LICENSE file for copyright and license details. */
 
@@ -7,10 +9,12 @@
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono:style=Medium:size=12" };
-static const char dmenufont[]       = "JetBrains Mono:style=Medium:size=12";
+static const int vertpad            = 0;        /* vertical padding of bar */
+static const int sidepad            = 0;        /* horizontal padding of bar */
+static const char *fonts[]          = { "JetBrainsMono Nerd Font Mono:style=Medium:size=12" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size=12";
 
 #include "colors-wal-dwm.h"
 
@@ -118,7 +122,9 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

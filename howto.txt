@@ -1,3 +1,12 @@
+IKONKY:::::::::::::::::::::::::::::::::::::::::::::::::
+
+sudo pacman -S ttf-jetbrains-mono-nerd 
+
+nastavit potom v ST
+
+echo "  󰁹  󰀿  󰋊"
+
+
 DOTFILES REPO ::::::::::::::::::::::::::::::::::::::::::
 
  Daily workflow:
@@ -151,6 +160,8 @@ curl -O https://st.suckless.org/patches/xresources/st-xresources-20200604-9ba7ec
 patch -p1 < st-xresources-20200604-9ba7ecf.diff
 
 cez git diff porovnam zmeny a potom ich skopirujem z config.def.h do config.h
+
+ked mam problem ze mam p1.rej, treba pozriet v akej subore treba co odstranit/pridat, napr. nieco tam bude ze v dwm.c treba upravit
 
 
 WAL;::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
