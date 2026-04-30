@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "JetBrainsMono Nerd Font:style=Medium:pixelsize=16:";
 static int borderpx = 2;
 
 /*
@@ -60,12 +60,12 @@ static double maxlatency = 33;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 300;
 
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 2;
+static unsigned int cursorthickness = 4;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -135,13 +135,20 @@ unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
 /*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
+ * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
+ * Default style of cursor
+ * 0: blinking block
+ * 1: blinking block (default)
+ * 2: steady block ("█")
+ * 3: blinking underline
+ * 4: steady underline ("_")
+ * 5: blinking bar
+ * 6: steady bar ("|")
+ * 7: blinking st cursor
+ * 8: steady st cursor
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorstyle = 3;
+static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
  * Default columns and rows numbers
@@ -169,6 +176,47 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",         STRING,  &font },
+		{ "color0",       STRING,  &colorname[0] },
+		{ "color1",       STRING,  &colorname[1] },
+		{ "color2",       STRING,  &colorname[2] },
+		{ "color3",       STRING,  &colorname[3] },
+		{ "color4",       STRING,  &colorname[4] },
+		{ "color5",       STRING,  &colorname[5] },
+		{ "color6",       STRING,  &colorname[6] },
+		{ "color7",       STRING,  &colorname[7] },
+		{ "color8",       STRING,  &colorname[8] },
+		{ "color9",       STRING,  &colorname[9] },
+		{ "color10",      STRING,  &colorname[10] },
+		{ "color11",      STRING,  &colorname[11] },
+		{ "color12",      STRING,  &colorname[12] },
+		{ "color13",      STRING,  &colorname[13] },
+		{ "color14",      STRING,  &colorname[14] },
+		{ "color15",      STRING,  &colorname[15] },
+		{ "background",   STRING,  &colorname[259] },
+		{ "foreground",   STRING,  &colorname[258] },
+		{ "cursorColor",  STRING,  &colorname[256] },
+		{ "termname",     STRING,  &termname },
+		{ "shell",        STRING,  &shell },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "chscale",      FLOAT,   &chscale },
+};
+
 
 /*
  * Internal mouse shortcuts.
@@ -201,7 +249,11 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = 10} },
+    { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = 10} },
 };
+
+
 
 /*
  * Special keys (change & recompile st.info accordingly)
@@ -248,7 +300,9 @@ static Key key[] = {
 	{ XK_KP_Home,       XK_ANY_MOD,     "\033[1~",       0,   +1},
 	{ XK_KP_Up,         XK_ANY_MOD,     "\033Ox",       +1,    0},
 	{ XK_KP_Up,         XK_ANY_MOD,     "\033[A",        0,   -1},
-	{ XK_KP_Up,         XK_ANY_MOD,     "\033OA",        0,   +1},
+	
+
+{ XK_KP_Up,         XK_ANY_MOD,     "\033OA",        0,   +1},
 	{ XK_KP_Down,       XK_ANY_MOD,     "\033Or",       +1,    0},
 	{ XK_KP_Down,       XK_ANY_MOD,     "\033[B",        0,   -1},
 	{ XK_KP_Down,       XK_ANY_MOD,     "\033OB",        0,   +1},
