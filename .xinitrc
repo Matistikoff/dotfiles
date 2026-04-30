@@ -1,5 +1,7 @@
 setxkbmap -option caps:escape;
 xset r rate 200 50;
+# Restore last pywal colors (sets wallpaper via feh + loads Xresources for ST)
+wal -R &
 xinput disable "TPPS/2 IBM TrackPoint";
 pywalfox update &
 ~/.local/bin/dwmstatus.sh &

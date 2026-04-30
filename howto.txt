@@ -192,11 +192,9 @@ sudo systemctl edit getty@tty1
 ExecStart=
 ExecStart=-/usr/bin/agetty --autologin tvoje_meno --noclear %I $TERM
 
-
 sudo systemctl daemon-reload
 
 sudo systemctl restart getty@tty1
-
 
 do bash_profile
 
