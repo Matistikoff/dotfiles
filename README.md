@@ -110,6 +110,9 @@ dotfiles/
 - `btop` — system monitor
 - `fastfetch` — system info
 - `yay` — AUR helper
+- `cava` — CLI audio visualizator
+- `spotify-player` — spotify-cli
+- `nchat` — whatsapp
 
 ### GUI
 - `firefox`, `chromium`

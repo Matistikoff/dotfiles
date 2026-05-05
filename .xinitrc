@@ -4,8 +4,8 @@ xset r rate 200 50;
 wal -R &
 xinput disable "TPPS/2 IBM TrackPoint";
 pywalfox update &
+~/scripts/cava-status.sh &
 dwmblocks &
-# ~/.local/bin/dwmstatus.sh &
 
 # Loop: restart dwm if sentinel file exists, otherwise exit session
 while true; do
