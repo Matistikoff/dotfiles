@@ -6,8 +6,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int gappx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int gappx  = 8;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -20,7 +20,7 @@ static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size
 
 
 /* tagging */
-static const char *tags[] = { "fox", "st", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "3", "", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -34,7 +34,7 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
+static const int nmaster     = 2;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals - TOTO SOM PRESTAVIL */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
@@ -77,9 +77,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 { MODKEY|ShiftMask,                       XK_BackSpace,      spawn,          SHCMD("~/.local/bin/powermenu.sh") },
 { MODKEY,                       XK_e,      spawn,          SHCMD("~/.local/bin/editmenu.sh") },
+{ MODKEY|ShiftMask, XK_e, spawn, SHCMD("~/scripts/nf-picker.sh") },
 { MODKEY,                       XK_s,      spawn,          SHCMD("~/.local/bin/scriptlauncher.sh") },
 { MODKEY|ShiftMask,                       XK_d,      spawn,          SHCMD("~/.local/bin/quickdir.sh") },
 { MODKEY,                       XK_w,      spawn,          SHCMD("firefox") },
@@ -96,9 +97,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	{ MODKEY, XK_a, spawn, SHCMD("st -e lf") },
-	{ 0, XF86XK_AudioMute,        spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
-	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
-	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+") },
+	{ 0, XF86XK_AudioMute,        spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle&& kill -RTMIN+1 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%- && kill -RTMIN+1 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+ && kill -RTMIN+1 $(pidof dwmblocks)") },
 	{ 0, XF86XK_Launch1, spawn, SHCMD("~/scripts/nightshift.sh") },
 	{ MODKEY, XK_p, spawn, SHCMD("rofi -show drun") },
 
