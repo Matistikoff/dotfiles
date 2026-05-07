@@ -1,3 +1,10 @@
+PICOM COMPOSITER ::: 
+
+.config/picom 
+
+viem nastavit transparancy pre dmenu, st atd. co chcem
+
+
 IKONKY:::::::::::::::::::::::::::::::::::::::::::::::::
 
 sudo pacman -S ttf-jetbrains-mono-nerd 

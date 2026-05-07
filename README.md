@@ -87,6 +87,7 @@ dotfiles/
 | `monitor` / `vga` | switch between LVDS-1 and VGA-1 |
 | `usb` / `usbW` | mount USB (ext4 / FAT) |
 | `dot` | git alias for this dotfiles repo |
+| `picomc` | picom config |
 
 ---
 
@@ -159,3 +160,53 @@ alias dot='git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 dot checkout
 dot config status.showUntrackedFiles no
 ```
+
+---
+
+## Applied Patches
+
+### DWM 6.6 Patches
+
+**Layout & Display**
+- `dwm-actualfullscreen-20211013-cb3f58a` — Proper fullscreen functionality
+- `dwm-attachbottom-6.3` — Attach new windows to bottom of stack instead of top
+- `dwm-fullgaps-20200508-7b77734` — Gaps between windows and screen edges
+- `dwm-hide_vacant_tags-6.4` — Hide tags with no windows
+
+**Theming & Appearance**
+- `dwm-defaulttransparency-r1521` — Support for transparent window backgrounds
+- `dwm-notitle-6.5` — Hide title bar for cleaner appearance
+- `dwm-xresources-20210827-138b405` — Load colors and settings from Xresources (integrated with pywal)
+
+**Status Bar**
+- `dwm-status2d-barpadding-20241018-44e9799` — 2D drawing support and bar padding for status bar
+- `dwm-statuscmd-status2d-20210405-60bb3df` — Execute commands from status bar
+
+**Utilities**
+- `dwm-scratchpad-20240321-061e9fe` — Scratchpad functionality (toggle hidden window)
+- `dwm-ipc` — IPC support for external window management
+
+### ST 0.9.3 Patches
+
+**Core Functionality**
+- `st-clipboard-0.8.3` — Improved clipboard handling for better copy/paste
+
+**Visual Enhancements**
+- `st-alpha-20240814-a0274bc` — Support for transparent/translucent terminal window
+- `st-xresources-20230320-45a15676` — Load colors and fonts from Xresources (integrated with pywal)
+
+**Cursor**
+- `st-blinking_cursor-20230819-3a6d6d7` — Blinking cursor support
+
+**Scrollback & Mouse Support**
+- `st-scrollback-0.9.2` — Scrollback buffer to view terminal history
+- `st-scrollback-mouse-0.9.2` — Scroll with mouse wheel
+- `st-scrollback-mouse-altscreen-20220127-2c5edf2` — Mouse scrolling in alternate screen mode (vim, less)
+- `st-scrollback-mouse-increment-0.9.2` — Improved mouse scrollback increments
+
+**Typography**
+- `st-ligatures-20251007-0.9.3` — Font ligatures support for programming fonts
+- `st-ligatures-scrollback-20251007-0.9.3` — Ligatures with scrollback integration
+
+**Terminfo**
+- `terminfo.patch` — Custom terminfo configuration (built-in)

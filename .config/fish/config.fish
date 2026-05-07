@@ -32,6 +32,7 @@ abbr fc 'nvim ~/.config/fish/config.fish'
 abbr status 'nvim ~/.local/bin/dwmstatus.sh'
 abbr howto 'cd ~ && nvim howto.txt'
 abbr readme 'cd ~ && nvim README.md'
+abbr picomc 'nvim ~/.config/picom/picom.conf'
 
 # ======================
 # DWM / ST
@@ -48,7 +49,7 @@ function dwmi
     and kill (pidof dwm)
 end
 
-function blockse
+function blockc
     cd ~/programs/dwmblocks-async
     nvim config.h
 end
@@ -145,6 +146,11 @@ end
 function wristwatchSolo
     mpv https://www.youtube.com/watch?v=OF7zHTxuFvk --start=00:02:52
 end
+
+function wishSolo
+    mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" https://www.youtube.com/watch?v=sG_K8sGflBY&t=2220s
+end
+
 
 
 function baterkaStats
