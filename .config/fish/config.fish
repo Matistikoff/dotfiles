@@ -10,6 +10,8 @@ set -g fish_cursor_default block blink
 set -g fish_cursor_insert line blink
 set -g fish_cursor_replace_one underscore blink
 
+fish_add_path ~/scripts
+
 
 # ======================
 # ABBR (aliasy)
@@ -17,7 +19,7 @@ set -g fish_cursor_replace_one underscore blink
 abbr e 'nvim'
 abbr .. 'cd ..'
 abbr '~' 'cd ~'
-abbr ls 'ls --color=auto'
+abbr ls 'ls --color=auto --quoting-style=literal'
 abbr ll 'ls -lah --color=auto'
 abbr grep 'grep --color=auto'
 abbr hidden 'ls -d .*'
@@ -33,6 +35,8 @@ abbr status 'nvim ~/.local/bin/dwmstatus.sh'
 abbr howto 'cd ~ && nvim howto.txt'
 abbr readme 'cd ~ && nvim README.md'
 abbr picomc 'nvim ~/.config/picom/picom.conf'
+abbr dunstc 'nvim ~/.config/dunst/dunstrc'
+abbr spotifyc 'nvim ~/.config/spotify-player/app.toml'
 
 # ======================
 # DWM / ST
@@ -151,6 +155,18 @@ function wishSolo
     mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" https://www.youtube.com/watch?v=sG_K8sGflBY&t=2220s
 end
 
+function D
+    cd ~/Downloads
+end
+
+function V
+    cd ~/Videos
+end
+
+function s
+    cd ~/scripts
+end
+
 
 
 function baterkaStats
@@ -173,7 +189,6 @@ bind \cp fzf_file_select
 # System paste
 bind -M insert \cv fish_clipboard_paste
 bind -M default \cv fish_clipboard_paste
-
 
 
 

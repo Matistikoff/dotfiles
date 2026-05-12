@@ -21,59 +21,16 @@ Minimal X11 setup — no desktop environment, suckless stack.
 | **Theming** | pywal — generates colors from wallpaper |
 | **Launcher** | dmenu, rofi |
 | **Audio** | PipeWire |
-
 ---
 
-## Repo structure
-
-```
-dotfiles/
-├── .bashrc                         # bash config, aliases
-├── .bash_profile                   # login shell, starts X on tty1
-├── .xinitrc                        # X11 startup (caps→esc, dwmstatus, exec dwm)
-├── .gitconfig                      # git identity and settings
-│
-├── .config/
-│   ├── fish/                       # fish shell config
-│   │   ├── config.fish             # env, abbrs, functions
-│   │   ├── fish_plugins            # fisher plugin list
-│   │   ├── functions/              # fish functions (fzf integrations, prompt)
-│   │   ├── completions/
-│   │   └── conf.d/
-│   └── wal/
-│       └── templates/
-│           ├── colors-wal-dwm.h    # pywal → dwm color header
-│           └── colors-st.h         # pywal → st color header
-│
-├── .local/bin/                     # personal scripts on $PATH
-│   ├── dwmstatus.sh                # status bar: battery, disk, time
-│   ├── change-wallpaper.sh         # apply wallpaper with pywal
-│   ├── powermenu.sh                # dmenu power menu
-│   ├── editmenu.sh                 # dmenu config editor
-│   ├── scriptlauncher.sh           # dmenu script launcher
-│   ├── quickdir.sh                 # quick directory jump
-│   └── ranger_fzf.sh               # ranger + fzf integration
-│
-├── scripts/
-│   ├── bateria_led.sh              # ThinkLight warning on low battery
-│   └── nightshift.sh               # toggle gammastep + LED indicator
-│
-└── dotfiles-suckless/
-    ├── dwm/
-    │   ├── config.h                # dwm configuration
-    │   └── PKGBUILD                # AUR build file
-    └── st/
-        ├── config.h                # st configuration
-        └── PKGBUILD                # AUR build file
-```
-
----
 
 ## Key fish functions / abbrs
 
 | Command | Action |
 |---|---|
 | `e` | open nvim |
+| `D` | go to Downloads |
+| `V` | go to Videos |
 | `v` | open mpv |
 | `o` | open sxiv |
 | `z` | open zathura |
@@ -114,6 +71,7 @@ dotfiles/
 - `cava` — CLI audio visualizator
 - `spotify-player` — spotify-cli
 - `nchat` — whatsapp
+- `unzip` — unzip
 
 ### GUI
 - `firefox`, `chromium`
@@ -122,6 +80,8 @@ dotfiles/
 - `kdenlive` — video editor
 - `kolourpaint` — image editor
 - `pcmanfm` — file manager
+- `audacious` — music player
+- `dunst` — notifikacie
 
 ### System / ThinkPad
 - `tlp` + `thermald` — power management
@@ -172,6 +132,7 @@ dot config status.showUntrackedFiles no
 - `dwm-attachbottom-6.3` — Attach new windows to bottom of stack instead of top
 - `dwm-fullgaps-20200508-7b77734` — Gaps between windows and screen edges
 - `dwm-hide_vacant_tags-6.4` — Hide tags with no windows
+- `dwm-shallow-6.3` — Kill useless terminal, for example when starting firefox 
 
 **Theming & Appearance**
 - `dwm-defaulttransparency-r1521` — Support for transparent window backgrounds
@@ -210,3 +171,50 @@ dot config status.showUntrackedFiles no
 
 **Terminfo**
 - `terminfo.patch` — Custom terminfo configuration (built-in)
+
+
+
+## Repo structure
+
+```
+dotfiles/
+├── .bashrc                         # bash config, aliases
+├── .bash_profile                   # login shell, starts X on tty1
+├── .xinitrc                        # X11 startup (caps→esc, dwmstatus, exec dwm)
+├── .gitconfig                      # git identity and settings
+│
+├── .config/
+│   ├── fish/                       # fish shell config
+│   │   ├── config.fish             # env, abbrs, functions
+│   │   ├── fish_plugins            # fisher plugin list
+│   │   ├── functions/              # fish functions (fzf integrations, prompt)
+│   │   ├── completions/
+│   │   └── conf.d/
+│   └── wal/
+│       └── templates/
+│           ├── colors-wal-dwm.h    # pywal → dwm color header
+│           └── colors-st.h         # pywal → st color header
+│
+├── .local/bin/                     # personal scripts on $PATH
+│   ├── dwmstatus.sh                # status bar: battery, disk, time
+│   ├── change-wallpaper.sh         # apply wallpaper with pywal
+│   ├── powermenu.sh                # dmenu power menu
+│   ├── editmenu.sh                 # dmenu config editor
+│   ├── scriptlauncher.sh           # dmenu script launcher
+│   ├── quickdir.sh                 # quick directory jump
+│   └── ranger_fzf.sh               # ranger + fzf integration
+│
+├── scripts/
+│   ├── bateria_led.sh              # ThinkLight warning on low battery
+│   └── nightshift.sh               # toggle gammastep + LED indicator
+│
+└── dotfiles-suckless/
+    ├── dwm/
+    │   ├── config.h                # dwm configuration
+    │   └── PKGBUILD                # AUR build file
+    └── st/
+        ├── config.h                # st configuration
+        └── PKGBUILD                # AUR build file
+```
+
+---

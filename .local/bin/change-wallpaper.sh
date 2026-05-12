@@ -22,3 +22,6 @@ pkill -x dwm 2>/dev/null || true
 
 # Update Firefox colors
 pywalfox update
+
+wal -i "$1" && cp ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc && pkill dunst; dunst &
+

@@ -6,6 +6,7 @@ picom &
 wal -R &
 xinput disable "TPPS/2 IBM TrackPoint";
 pywalfox update &
+dunst &
 
 # Loop: restart dwm if sentinel file exists, otherwise exit session
 while true; do

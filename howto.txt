@@ -1,3 +1,12 @@
+SCRIPTS / FISH ::: 
+
+staci ze som do fish configu pridal
+
+fish_add_path ~/scripts
+
+a uz vie spustit sam odtial scripty bez toho aby som zadefinoval function
+
+
 PICOM COMPOSITER ::: 
 
 .config/picom 

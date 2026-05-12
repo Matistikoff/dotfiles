@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+MUSIC_DIR="$HOME/music"
+
+if [ $# -eq 0 ]; then
+    echo "Pouzitie:"
+    echo "  ytmp3 URL_OR_ID [URL_OR_ID ...]"
+    echo "  	funguje na youtube, soundcloud, bandcamp a rozne stranky, staci dat URL, alebo z YT iba to co je za watch="
+    exit 1
+fi
+
+mkdir -p "$MUSIC_DIR"
+
+for item in "$@"; do
+
+    # ak je zadane iba video ID
+    if [[ ! "$item" =~ ^https?:// ]]; then
+        item="https://www.youtube.com/watch?v=$item"
+    fi
+
+    echo ""
+    echo "Stahujem: $item"
+    echo ""
+
+    yt-dlp \
+        -x \
+        --audio-format mp3 \
+        --audio-quality 0 \
+        --embed-metadata \
+        --embed-thumbnail \
+        --parse-metadata "playlist_index:%(track_number)s" \
+        -o "$MUSIC_DIR/%(playlist_title|Unknown Playlist)s/%(playlist_index)02d - %(title)s.%(ext)s" \
+        "$item"
+
+done
